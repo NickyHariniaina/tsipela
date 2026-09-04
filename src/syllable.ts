@@ -1,3 +1,3 @@
 export enum Syllable {
-    a
+    a, u
 }
