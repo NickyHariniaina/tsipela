@@ -50,7 +50,6 @@ export function separate(
     }
 
     if (undefinedCount > 0) {
-        console.log("syllables here: " + syllables);
         separate(word, syllables, undefinedCount);
     }
 
