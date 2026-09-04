@@ -1,0 +1,36 @@
+{
+  "name": "tsipela",
+  "version": "1.0.0",
+  "description": "Casual phonetic parser",
+  "homepage": "https://github.com/NickyHariniaina/tsipela#readme",
+  "bugs": {
+    "url": "https://github.com/NickyHariniaina/tsipela/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickyHariniaina/tsipela.git"
+  },
+  "type": "module",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "test:ci": "vitest --run --coverage",
+    "coverage": "vitest run --coverage",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "run": "node build/main.js",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "@vitest/coverage-v8": "^5.0.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.0"
+  }
+}

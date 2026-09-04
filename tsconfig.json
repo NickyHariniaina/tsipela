@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./build",
+
+    // Environment Settings
+    "module": "NodeNext",
+    "target": "ES2022",  // More specific than "esnext"
+    "lib": ["ES2022"],   // Node.js built-ins
+    "types": ["node", "vitest/globals"],
+    "moduleResolution": "nodenext",
+
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Style Options - RECOMMENDED TO ENABLE
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    // Recommended Options
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+
+    // Additional Node.js Recommendations
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": false  // Keep it pure TypeScript
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"]
+}
