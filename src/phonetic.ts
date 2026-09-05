@@ -1,6 +1,395 @@
 import type { Word } from "./parser.js";
 import { Syllable } from "./syllable.js";
 
+export function getWordFromPhonetic(phonetic: string): string {
+    let str = "";
+
+    for (let i = 0; i < phonetic.length; i++) {
+        const current = phonetic[i];
+        const previous = phonetic[i - 1] || "";
+        const next = phonetic[i + 1] || "";
+        const nextNext = phonetic[i + 2] || "";
+
+        if (current === "t" && next === "s") {
+            if (nextNext === "a") {
+                str += "tsa";
+                i += 2;
+            } else if (nextNext === "e") {
+                str += "tse";
+                i += 2;
+            } else if (nextNext === "i") {
+                str += "tsi";
+                i += 2;
+            } else if (nextNext === "u") {
+                str += "tso";
+                i += 2;
+            } else {
+                str += "ts";
+                i += 1;
+            }
+        } else if (current === "t" && next === "r") {
+            if (nextNext === "a") {
+                str += "tra";
+                i += 2;
+            } else if (nextNext === "e") {
+                str += "tre";
+                i += 2;
+            } else if (nextNext === "i") {
+                str += "tri";
+                i += 2;
+            } else if (nextNext === "u") {
+                str += "tro";
+                i += 2;
+            } else {
+                str += "tr";
+                i += 1;
+            }
+        } else if (current === "n") {
+            if (next === "a") {
+                str += "na";
+                i++;
+            } else if (next === "e") {
+                str += "ne";
+                i++;
+            } else if (next === "i") {
+                // Check if this is the last syllable (end of word)
+                if (i + 2 >= phonetic.length) {
+                    str += "ny"; // 'i' at end becomes 'y'
+                } else {
+                    str += "ni";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "no";
+                i++;
+            } else {
+                str += "n";
+            }
+        } else if (current === "m") {
+            if (next === "a") {
+                str += "ma";
+                i++;
+            } else if (next === "e") {
+                str += "me";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "my";
+                } else {
+                    str += "mi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "mo";
+                i++;
+            } else {
+                str += "m";
+            }
+        } else if (current === "r") {
+            if (next === "a") {
+                str += "ra";
+                i++;
+            } else if (next === "e") {
+                str += "re";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "ry";
+                } else {
+                    str += "ri";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "ro";
+                i++;
+            } else {
+                str += "r";
+            }
+        } else if (current === "t") {
+            if (next === "a") {
+                str += "ta";
+                i++;
+            } else if (next === "e") {
+                str += "te";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "ty";
+                } else {
+                    str += "ti";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "to";
+                i++;
+            } else {
+                str += "t";
+            }
+        } else if (current === "l") {
+            if (next === "a") {
+                str += "la";
+                i++;
+            } else if (next === "e") {
+                str += "le";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "ly";
+                } else {
+                    str += "li";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "lo";
+                i++;
+            } else {
+                str += "l";
+            }
+        } else if (current === "h") {
+            if (next === "a") {
+                str += "ha";
+                i++;
+            } else if (next === "e") {
+                str += "he";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "hy";
+                } else {
+                    str += "hi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "ho";
+                i++;
+            } else {
+                str += "h";
+            }
+        } else if (current === "d") {
+            if (next === "a") {
+                str += "da";
+                i++;
+            } else if (next === "e") {
+                str += "de";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "dy";
+                } else {
+                    str += "di";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "do";
+                i++;
+            } else {
+                str += "d";
+            }
+        } else if (current === "k") {
+            if (next === "a") {
+                str += "ka";
+                i++;
+            } else if (next === "e") {
+                str += "ke";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "ky";
+                } else {
+                    str += "ki";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "ko";
+                i++;
+            } else {
+                str += "k";
+            }
+        } else if (current === "z") {
+            if (next === "a") {
+                str += "za";
+                i++;
+            } else if (next === "e") {
+                str += "ze";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "zy";
+                } else {
+                    str += "zi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "zo";
+                i++;
+            } else {
+                str += "z";
+            }
+        } else if (current === "g") {
+            if (next === "a") {
+                str += "ga";
+                i++;
+            } else if (next === "e") {
+                str += "ge";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "gy";
+                } else {
+                    str += "gi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "go";
+                i++;
+            } else {
+                str += "g";
+            }
+        } else if (current === "f") {
+            if (next === "a") {
+                str += "fa";
+                i++;
+            } else if (next === "e") {
+                str += "fe";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "fy";
+                } else {
+                    str += "fi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "fo";
+                i++;
+            } else {
+                str += "f";
+            }
+        } else if (current === "s") {
+            if (next === "a") {
+                str += "sa";
+                i++;
+            } else if (next === "e") {
+                str += "se";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "sy";
+                } else {
+                    str += "si";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "so";
+                i++;
+            } else {
+                str += "s";
+            }
+        } else if (current === "b") {
+            if (next === "a") {
+                str += "ba";
+                i++;
+            } else if (next === "e") {
+                str += "be";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "by";
+                } else {
+                    str += "bi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "bo";
+                i++;
+            } else {
+                str += "b";
+            }
+        } else if (current === "v") {
+            if (next === "a") {
+                str += "va";
+                i++;
+            } else if (next === "e") {
+                str += "ve";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "vy";
+                } else {
+                    str += "vi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "vo";
+                i++;
+            } else {
+                str += "v";
+            }
+        } else if (current === "p") {
+            if (next === "a") {
+                str += "pa";
+                i++;
+            } else if (next === "e") {
+                str += "pe";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "py";
+                } else {
+                    str += "pi";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "po";
+                i++;
+            } else {
+                str += "p";
+            }
+        } else if (current === "j") {
+            if (next === "a") {
+                str += "ja";
+                i++;
+            } else if (next === "e") {
+                str += "je";
+                i++;
+            } else if (next === "i") {
+                if (i + 2 >= phonetic.length) {
+                    str += "jy";
+                } else {
+                    str += "ji";
+                }
+                i++;
+            } else if (next === "u") {
+                str += "jo";
+                i++;
+            } else {
+                str += "j";
+            }
+        } else if (current === "o" && previous == "a") {
+            str += "o";
+        } else if (current === "o") {
+            str += "ao";
+        } else if (current === "a") {
+            str += "a";
+        } else if (current === "e") {
+            str += "e";
+        } else if (current === "i") {
+            // 'i' at the end of the phonetic string becomes 'y'
+            if (i === phonetic.length - 1) {
+                str += "y";
+            } else {
+                str += "i";
+            }
+        } else if (current === "u") {
+            str += "o";
+        } else {
+            str += current;
+        }
+    }
+
+    return str;
+}
+
 export function factorizeSyllableToNormalPhonetic(word: Word): string {
     let phonetic = "";
 
@@ -17,10 +406,19 @@ export function factorizeSyllableToNormalPhonetic(word: Word): string {
             phonetic += "i";
         } else if (currentSyllable.syllable === Syllable.u) {
             const len = word.syllables[i - 1]?.character.length;
-            if (word.syllables[i - 1]?.character[len - 1] == "a") {
+            if (
+                word.syllables[i]?.character == "o" &&
+                phonetic.length == 1 &&
+                word.syllables[i - 1]?.character == "a" &&
+                i + 1 != word.syllables.length
+            ) {
+                phonetic += "o";
+            } else if (word.syllables[i - 1]?.character[len - 1] == "a") {
                 if (i + 1 != word.syllables.length) {
                     phonetic = phonetic.slice(0, -1);
                     phonetic += "o";
+                } else if (i == 1) {
+                    phonetic += "u";
                 } else {
                     phonetic += "u";
                 }
