@@ -49,6 +49,7 @@ export function separate(
                 separateS(syllables, i, undefinedCount);
                 separateB(syllables, i, undefinedCount);
                 separateV(syllables, i, undefinedCount);
+                separateP(syllables, i, undefinedCount);
             }
         }
     }
@@ -60,7 +61,45 @@ export function separate(
     return { syllables };
 }
 
-function separateR(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateP(syllables: SyllableObject[], i: number, undefinedCount: number) {
+    if (syllables[i]?.character == "p") {
+        if (syllables[i + 1]?.syllable == Syllable.a) {
+            syllables[i] = {
+                syllable: Syllable.pa,
+                character: "pa",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.i) {
+            syllables[i] = {
+                syllable: Syllable.pi,
+                character: syllables[i + 1]?.character == "i" ? "pi" : "py",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.u) {
+            syllables[i] = {
+                syllable: Syllable.pu,
+                character: "po",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.e) {
+            syllables[i] = {
+                syllable: Syllable.pe,
+                character: "pe",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        }
+    }
+}
+
+function separateR(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "r") {
         if (syllables[i + 1]?.syllable == Syllable.u) {
             syllables[i] = {
@@ -121,6 +160,11 @@ function separateN(
             };
             syllables.splice(i + 1, 1);
             undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.consonant) {
+            syllables[i] = {
+                syllable: Syllable.n,
+                character: "n",
+            };
         }
     }
 }
@@ -136,27 +180,58 @@ function separateT(
                 syllable: Syllable.tu,
                 character: "to",
             };
-            syllables.splice(i + 1, 1);
-            undefinedCount--;
         } else if (syllables[i + 1]?.syllable == Syllable.i) {
             syllables[i] = {
                 syllable: Syllable.ti,
                 character: syllables[i + 1]?.character == "i" ? "ti" : "ty",
             };
-            syllables.splice(i + 1, 1);
-            undefinedCount--;
         } else if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
                 syllable: Syllable.ta,
                 character: "ta",
             };
+        } else if (syllables[i + 1]?.syllable == Syllable.consonant) {
+            const isTr = syllables[i + 1]?.character == "r";
+            if (syllables[i + 2]?.syllable == Syllable.i) {
+                syllables[i] = {
+                    syllable: isTr ? Syllable.tri : Syllable.tsi,
+                    character: isTr
+                        ? syllables[i + 2]?.character == "i"
+                            ? "tri"
+                            : "try"
+                        : syllables[i + 2]?.character == "i"
+                          ? "tsi"
+                          : "tsy",
+                };
+            } else if (syllables[i + 2]?.syllable == Syllable.a) {
+                syllables[i] = {
+                    syllable: isTr ? Syllable.tra : Syllable.tsa,
+                    character: isTr ? "tra" : "tsa",
+                };
+            } else if (syllables[i + 2]?.syllable == Syllable.u) {
+                syllables[i] = {
+                    syllable: isTr ? Syllable.tru : Syllable.tsu,
+                    character: isTr ? "tro" : "tso",
+                };
+            } else if (syllables[i + 2]?.syllable == Syllable.e) {
+                syllables[i] = {
+                    syllable: isTr ? Syllable.tre : Syllable.tse,
+                    character: isTr ? "tre" : "tse",
+                };
+            }
             syllables.splice(i + 1, 1);
             undefinedCount--;
         }
+        syllables.splice(i + 1, 1);
+        undefinedCount--;
     }
 }
 
-function separateM(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateM(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "m") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -186,11 +261,20 @@ function separateM(syllables: SyllableObject[], i: number, undefinedCount: numbe
             };
             syllables.splice(i + 1, 1);
             undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.consonant) {
+            syllables[i] = {
+                syllable: Syllable.m,
+                character: "m",
+            };
         }
     }
 }
 
-function separateL(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateL(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "l") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -224,7 +308,11 @@ function separateL(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateH(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateH(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "h") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -258,7 +346,11 @@ function separateH(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateD(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateD(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "d") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -281,7 +373,7 @@ function separateD(syllables: SyllableObject[], i: number, undefinedCount: numbe
             };
             syllables.splice(i + 1, 1);
             undefinedCount--;
-        } else  if (syllables[i + 1]?.syllable == Syllable.e) {
+        } else if (syllables[i + 1]?.syllable == Syllable.e) {
             syllables[i] = {
                 syllable: Syllable.de,
                 character: "de",
@@ -299,7 +391,11 @@ function separateD(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateK(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateK(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "k") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -333,7 +429,11 @@ function separateK(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateZ(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateZ(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "z") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -367,7 +467,11 @@ function separateZ(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateG(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateG(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "g") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -401,7 +505,11 @@ function separateG(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateF(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateF(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "f") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -435,7 +543,11 @@ function separateF(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateS(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateS(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "s") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -469,7 +581,11 @@ function separateS(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateB(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateB(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "b") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {
@@ -503,7 +619,11 @@ function separateB(syllables: SyllableObject[], i: number, undefinedCount: numbe
     }
 }
 
-function separateV(syllables: SyllableObject[], i: number, undefinedCount: number) {
+function separateV(
+    syllables: SyllableObject[],
+    i: number,
+    undefinedCount: number,
+) {
     if (syllables[i]?.character == "v") {
         if (syllables[i + 1]?.syllable == Syllable.a) {
             syllables[i] = {

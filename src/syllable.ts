@@ -1,4 +1,6 @@
 export enum Syllable {
+    n = "n",
+    m = "m",
     a = "a",
     u = "u",
     e = "e",
@@ -57,6 +59,18 @@ export enum Syllable {
     vi = "vi",
     va = "va",
     ve = "ve",
+    tsi = "tsi",
+    tsa = "tsa",
+    tsu = "tsu",
+    tse = "tse",
+    tra = "tra",
+    tri = "tri",
+    tru = "tru",
+    tre = "tre",
+    pa = "pa",
+    pi = "pi",
+    pu = "pu",
+    pe = "pe",
     consonant = "consonant",
 }
 

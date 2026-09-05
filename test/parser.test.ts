@@ -222,5 +222,159 @@ describe("Parse to get double letter syllable", () => {
             ],
         });
     });
-
 });
+
+describe("Parse to get triple letter syllable", () => {
+    it("should return correct syllable for tsia", () => {
+        expect(separate("tsia")).toEqual({
+            syllables: [
+                { syllable: Syllable.tsi, character: "tsi" },
+                { syllable: Syllable.a, character: "a" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for tsena", () => {
+        expect(separate("tsena")).toEqual({
+            syllables: [
+                { syllable: Syllable.tse, character: "tse" },
+                { syllable: Syllable.na, character: "na" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for tsofa", () => {
+        expect(separate("tsofa")).toEqual({
+            syllables: [
+                { syllable: Syllable.tsu, character: "tso" },
+                { syllable: Syllable.fa, character: "fa" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for ratsy", () => {
+        expect(separate("ratsy")).toEqual({
+            syllables: [
+                { syllable: Syllable.ra, character: "ra" },
+                { syllable: Syllable.tsi, character: "tsy" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for parasy", () => {
+        expect(separate("parasy")).toEqual({
+            syllables: [
+                { syllable: Syllable.pa, character: "pa" },
+                { syllable: Syllable.ra, character: "ra" },
+                { syllable: Syllable.si, character: "sy" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for fotsy", () => {
+        expect(separate("fotsy")).toEqual({
+            syllables: [
+                { syllable: Syllable.fu, character: "fo" },
+                { syllable: Syllable.tsi, character: "tsy" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for atrika", () => {
+        expect(separate("atrika")).toEqual({
+            syllables: [
+                { syllable: Syllable.a, character: "a" },
+                { syllable: Syllable.tri, character: "tri" },
+                { syllable: Syllable.ka, character: "ka" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for trano", () => {
+        expect(separate("trano")).toEqual({
+            syllables: [
+                { syllable: Syllable.tra, character: "tra" },
+                { syllable: Syllable.nu, character: "no" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for ratra", () => {
+        expect(separate("ratra")).toEqual({
+            syllables: [
+                { syllable: Syllable.ra, character: "ra" },
+                { syllable: Syllable.tra, character: "tra" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for tselatra", () => {
+        expect(separate("tselatra")).toEqual({
+            syllables: [
+                { syllable: Syllable.tse, character: "tse" },
+                { syllable: Syllable.la, character: "la" },
+                { syllable: Syllable.tra, character: "tra" },
+            ],
+        });
+    });
+});
+
+describe("Should parse muted letters", () => {
+    it("should return correct syllable for hoany", () => {
+        expect(separate("hoany")).toEqual({
+            syllables: [
+                { syllable: Syllable.hu, character: "ho" },
+                { syllable: Syllable.a, character: "a" },
+                { syllable: Syllable.ni, character: "ny" },
+            ],
+        });
+    });
+});
+
+describe("Should parse single consonants", () => {
+    it("should return correct syllable for mpangalatra", () => {
+        expect(separate("mpangalatra")).toEqual({
+            syllables: [
+                { syllable: Syllable.m, character: "m" },
+                { syllable: Syllable.pa, character: "pa" },
+                { syllable: Syllable.n, character: "n" },
+                { syllable: Syllable.ga, character: "ga" },
+                { syllable: Syllable.la, character: "la" },
+                { syllable: Syllable.tra, character: "tra" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for mpamono", () => {
+        expect(separate("mpamono")).toEqual({
+            syllables: [
+                { syllable: Syllable.m, character: "m" },
+                { syllable: Syllable.pa, character: "pa" },
+                { syllable: Syllable.mu, character: "mo" },
+                { syllable: Syllable.nu, character: "no" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for andevo", () => {
+        expect(separate("andevo")).toEqual({
+            syllables: [
+                { syllable: Syllable.a, character: "a" },
+                { syllable: Syllable.n, character: "n" },
+                { syllable: Syllable.de, character: "de" },
+                { syllable: Syllable.vu, character: "vo" },
+            ],
+        });
+    });
+
+    it("should return correct syllable for angivy", () => {
+        expect(separate("angivy")).toEqual({
+            syllables: [
+                { syllable: Syllable.a, character: "a" },
+                { syllable: Syllable.n, character: "n" },
+                { syllable: Syllable.gi, character: "gi" },
+                { syllable: Syllable.vi, character: "vy" },
+            ],
+        });
+    });
+})
