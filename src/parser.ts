@@ -50,6 +50,7 @@ export function separate(
                 separateB(syllables, i, undefinedCount);
                 separateV(syllables, i, undefinedCount);
                 separateP(syllables, i, undefinedCount);
+                separateJ(syllables, i, undefinedCount);
             }
         }
     }
@@ -59,6 +60,40 @@ export function separate(
     }
 
     return { syllables };
+}
+
+function separateJ(syllables: SyllableObject[], i: number, undefinedCount: number) {
+    if (syllables[i]?.character == "j") {
+        if (syllables[i + 1]?.syllable == Syllable.a) {
+            syllables[i] = {
+                syllable: Syllable.ja,
+                character: "ja",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.u) {
+            syllables[i] = {
+                syllable: Syllable.ju,
+                character: "jo",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.e) {
+            syllables[i] = {
+                syllable: Syllable.je,
+                character: "je",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        } else if (syllables[i + 1]?.syllable == Syllable.i) {
+            syllables[i] = {
+                syllable: Syllable.ji,
+                character: syllables[i + 1]?.character == "i" ? "ji" : "jy",
+            };
+            syllables.splice(i + 1, 1);
+            undefinedCount--;
+        }
+    }
 }
 
 function separateP(syllables: SyllableObject[], i: number, undefinedCount: number) {

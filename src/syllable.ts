@@ -71,6 +71,10 @@ export enum Syllable {
     pi = "pi",
     pu = "pu",
     pe = "pe",
+    ju = "ju",
+    ja = "ja",
+    je = "je",
+    ji = "ji",
     consonant = "consonant",
 }
 

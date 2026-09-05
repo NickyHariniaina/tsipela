@@ -38,6 +38,6 @@ describe("Should factorize complex group of syllable", () => {
     });
 
     it("should return correct phonetic for saonjo", () => {
-        expect(factorizeSyllableToNormalPhonetic(separate("saonjo"))).toEqual("sonjo");
+        expect(factorizeSyllableToNormalPhonetic(separate("saonjo"))).toEqual("sonju");
     });
 });

@@ -165,6 +165,14 @@ export function factorizeSyllableToNormalPhonetic(word: Word): string {
             phonetic += "m";
         } else if (currentSyllable.syllable === Syllable.consonant) {
             phonetic += currentSyllable.character || "";
+        } else if (currentSyllable.syllable === Syllable.ju) {
+            phonetic += "ju";
+        } else if (currentSyllable.syllable === Syllable.ja) {
+            phonetic += "ja";
+        } else if (currentSyllable.syllable === Syllable.je) {
+            phonetic += "je";
+        } else if (currentSyllable.syllable === Syllable.ji) {
+            phonetic += "ji";
         }
     }
 
