@@ -1,6 +1,9 @@
 import { separate } from "./parser.js";
-import fs from 'fs/promises';
+import { readJsonFile } from "./utils.js";
 
-const data = await fs.readFile('./data/litera_a.json', 'utf8');
-const jsonData = JSON.parse(data);
-console.log(separate(jsonData[40].word.toLowerCase()));
+console.log(separate("angivy"));
+
+const jsonData = await readJsonFile("./data/litera_a.json");
+console.log(jsonData);
+
+
