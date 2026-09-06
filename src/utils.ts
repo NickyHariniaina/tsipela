@@ -4,3 +4,8 @@ export async function readJsonFile(filePath: string) {
     const jsonData = JSON.parse(data);
     return jsonData;
 }
+
+export async function readTextFile(filePath: string) {
+    const data = await fs.readFile(filePath, "utf8");
+    return data;
+}

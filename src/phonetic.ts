@@ -1,6 +1,32 @@
 import type { Word } from "./parser.js";
 import { Syllable } from "./syllable.js";
 
+export function factorizePhonetic(phonetic: string) {
+    //  NOTE: some malagasy texto like factorization.
+    let newPhonetic: string = phonetic
+        .replaceAll("hu", "u")
+        .replaceAll("ua", "o")
+        .replaceAll(/\b(\w*)(nina)\b/g, "$1na")
+        .replace(/\b(\w*)(na|no|ne|ni|nu)\b/g, "$1n")
+        .replace(/\b(\w*)(hi)\b/g, "$1")
+        .replaceAll("ia", "e")
+        .replace(/\b(\w*)(si)\b/g, "$1s")
+        .replaceAll("u", "o");
+
+    return {
+        initialPhonetic: phonetic,
+        lowestPhonetic: newPhonetic,
+    };
+}
+
+//  TODO: This function may be removed later... OR FIXED.
+//   FIXME: Whit is wrong:
+//   - This function will not return the correct word since we factorize the phonetic before using this function.
+//   The factorized phonetic is not the same as the phonetic of the word.
+//   Why ? -> we really lowered it. So any word would just match ( used for matching )
+//   ... But since I'm writing this... I think Imma just store the actual data that will be changed...
+//   Idk if replaceAll and replace act on the current string or on a copy of it.
+//   I'm a bad js dev, btw.
 export function getWordFromPhonetic(phonetic: string): string {
     let str = "";
 
